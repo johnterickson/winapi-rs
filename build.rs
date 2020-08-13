@@ -4,7 +4,7 @@
 // All files in the project carrying such notice may not be copied, modified, or distributed
 // except according to those terms.
 use std::cell::Cell;
-use std::collections::HashMap;
+use std::collections::BTreeMap;
 use std::env::var;
 // (header name, &[header dependencies], &[library dependencies])
 const DATA: &'static [(&'static str, &'static [&'static str], &'static [&'static str])] = &[
@@ -416,7 +416,7 @@ struct Header {
     dependencies: &'static [&'static str],
     libraries: &'static [&'static str],
 }
-struct Graph(HashMap<&'static str, Header>);
+struct Graph(BTreeMap<&'static str, Header>);
 impl Graph {
     fn generate() -> Graph {
         Graph(DATA.iter().map(|&(name, dependencies, libraries)| {
